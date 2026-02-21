@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Project case study by Asrith Kulukuri" />
+    <title>Project Case Study | Asrith</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+    <div class="bg-glow"></div>
+    <main class="case-main">
+        <section class="container case-wrap reveal">
+            <header class="case-header">
+                <a class="project-link" href="./index.html#projects">← Back to Projects</a>
+                <h1 id="caseTitle">Loading case study...</h1>
+                <p id="caseDesc" class="section-sub">Fetching project details from GitHub.</p>
+                <div id="caseMeta" class="case-meta"></div>
+            </header>
+
+            <article class="case-block">
+                <h2>Problem</h2>
+                <p id="problemText">This project explores a practical use case with real-world constraints and iterative
+                    improvements.</p>
+            </article>
+
+            <article class="case-block">
+                <h2>Approach</h2>
+                <p id="approachText">The implementation emphasizes clean structure, reliability, and progressive feature
+                    delivery.</p>
+            </article>
+
+            <article class="case-block">
+                <h2>Outcome</h2>
+                <p id="outcomeText">The result is a maintainable build that can evolve quickly and deliver value in
+                    production settings.</p>
+            </article>
+
+            <div class="case-actions">
+                <a id="sourceLink" class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer">View
+                    Source</a>
+                <a id="liveLink" class="btn btn-secondary" href="#" target="_blank" rel="noopener noreferrer">Live
+                    Demo</a>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const repoName = params.get('repo');
+        const githubUser = 'AsrithKulukuri';
+
+        const titleEl = document.getElementById('caseTitle');
+        const descEl = document.getElementById('caseDesc');
+        const metaEl = document.getElementById('caseMeta');
+        const sourceLink = document.getElementById('sourceLink');
+        const liveLink = document.getElementById('liveLink');
+        const revealEl = document.querySelector('.reveal');
+
+        if (revealEl) revealEl.classList.add('revealed');
+
+        function tag(label) {
+            const span = document.createElement('span');
+            span.className = 'social';
+            span.textContent = label;
+            return span;
+        }
+
+        async function initCaseStudy() {
+            if (!repoName) {
+                titleEl.textContent = 'Project not found';
+                descEl.textContent = 'No repository was selected. Please return to Projects and choose a case study.';
+                sourceLink.href = `https://github.com/${githubUser}`;
+                liveLink.style.display = 'none';
+                return;
+            }
+
+            try {
+                const response = await fetch(`https://api.github.com/repos/${githubUser}/${repoName}`);
+                if (!response.ok) throw new Error('Repo not found');
+                const repo = await response.json();
+
+                titleEl.textContent = repo.name.replace(/[-_]/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+                descEl.textContent = repo.description || 'A focused engineering project built for learning and practical impact.';
+
+                metaEl.appendChild(tag(repo.language || 'Code'));
+                metaEl.appendChild(tag(repo.fork ? 'Fork' : 'Original'));
+                metaEl.appendChild(tag(`Stars ${repo.stargazers_count}`));
+                metaEl.appendChild(tag(`Updated ${new Date(repo.updated_at).toLocaleDateString('en-IN', { month: 'short', year: 'numeric' })}`));
+
+                sourceLink.href = repo.html_url;
+                liveLink.href = repo.homepage || repo.html_url;
+
+                if (!repo.homepage) {
+                    liveLink.textContent = 'Open Repository';
+                }
+
+                document.getElementById('problemText').textContent =
+                    `The challenge was to build ${repo.name} in a way that is practical, easy to maintain, and useful for real users.`;
+                document.getElementById('approachText').textContent =
+                    `I used ${repo.language || 'a suitable stack'} with incremental iterations, testing features quickly, and refining based on usage.`;
+                document.getElementById('outcomeText').textContent =
+                    `The project now serves as part of my portfolio and demonstrates shipping ability, clean implementation, and continuous improvement.`;
+            } catch {
+                titleEl.textContent = 'Unable to load case study';
+                descEl.textContent = 'GitHub data could not be fetched right now. Please try again.';
+                sourceLink.href = `https://github.com/${githubUser}`;
+                liveLink.style.display = 'none';
+            }
+        }
+
+        initCaseStudy();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Asrith Portfolio OG Image">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1a0a27" />
+      <stop offset="1" stop-color="#020419" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff3b78" />
+      <stop offset="1" stop-color="#5a6fff" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <text x="90" y="260" fill="#e9f0ff" font-family="Inter, Arial, sans-serif" font-size="76" font-weight="800">Asrith Kulukuri</text>
+  <text x="90" y="340" fill="url(#accent)" font-family="Inter, Arial, sans-serif" font-size="52" font-weight="700">Developer Portfolio</text>
+  <text x="90" y="410" fill="#9cabcc" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="500">I build apps. I ship ideas. I break things to learn.</text>
+</svg>

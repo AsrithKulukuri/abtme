@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Asrith Kulukuri - student developer building apps, bots, and web projects with a product mindset." />
+    <meta name="keywords"
+        content="Asrith Kulukuri, developer portfolio, student developer, JavaScript, web development" />
+    <meta name="author" content="Asrith Kulukuri" />
+    <meta name="theme-color" content="#020419" />
+    <meta property="og:title" content="Asrith | Developer Portfolio" />
+    <meta property="og:description" content="I build apps. I ship ideas. I break things to learn." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://asrith-portfolio.vercel.app/" />
+    <meta property="og:image" content="./og-image.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Asrith | Developer Portfolio" />
+    <meta name="twitter:description" content="Projects, journey, and ways to connect with Asrith Kulukuri." />
+    <meta name="twitter:image" content="./og-image.svg" />
+    <link rel="canonical" href="https://asrith-portfolio.vercel.app/" />
+    <link rel="manifest" href="./site.webmanifest" />
+    <title>Asrith | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./futuristic-ui.css" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Asrith Kulukuri",
+      "jobTitle": "Student Developer",
+      "url": "https://asrith-portfolio.vercel.app/",
+      "sameAs": [
+        "https://github.com/AsrithKulukuri",
+        "https://www.linkedin.com/in/kulkuri-asrith-927070393"
+      ]
+    }
+    </script>
+</head>
+
+<body>
+    <div id="loadingScreen" class="loading-screen" aria-live="polite">
+        <div class="loader-card">
+            <p class="loader-title">Starting portfolio runtime...</p>
+            <p id="loaderLine" class="loader-line">Booting Asrith.exe</p>
+            <div class="loader-progress-wrap">
+                <div id="loaderProgress" class="loader-progress"></div>
+            </div>
+            <p id="loaderJoke" class="loader-joke">Initializing awesomeness...</p>
+        </div>
+    </div>
+
+    <div class="bg-glow"></div>
+    <header class="nav-wrap">
+        <nav class="container nav" aria-label="Main navigation">
+            <a class="brand" href="#home" aria-label="Go to home section">
+                <span class="brand-mark">›</span> Asrith<span class="accent">_</span>
+            </a>
+
+            <div class="theme-toggle-wrapper">
+                <button id="themeToggle" class="theme-toggle theme-selector-btn" type="button" title="Switch themes">
+                    🎨 Themes
+                </button>
+
+                <div id="themeSwitcher" class="theme-switcher" role="group" aria-label="Theme selector">
+                    <!-- Themes populated by themes.js -->
+                </div>
+            </div>
+
+            <div class="header-games">
+                <button id="gamesBugBtn" type="button" class="header-btn" title="Play Catch the Bug">🐞</button>
+                <button id="gamesClickerBtn" type="button" class="header-btn" title="Coffee Clicker">☕</button>
+            </div>
+
+            <button id="menuButton" class="menu-btn" aria-expanded="false" aria-controls="navLinks">
+                Menu
+            </button>
+
+            <ul id="navLinks" class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#proof">Proof</a></li>
+                <li><a href="#journey">Journey</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li class="mobile-theme-divider"></li>
+                <li class="mobile-theme-section">
+                    <div class="mobile-theme-label">🎨 Themes</div>
+                    <div id="mobileThemeSwitcher" class="mobile-theme-options">
+                        <!-- Themes populated by themes.js -->
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="home">
+        <section class="hero container section-gap reveal">
+            <div class="hero-terminal" aria-label="Interactive terminal">
+                <div class="terminal-head">
+                    <span></span><span></span><span></span>
+                </div>
+                <div class="terminal-body terminal-live" id="heroTerminal">
+                    <div class="terminal-output" id="terminalOutput" aria-live="polite">
+                        <p><span class="u">visitor@portfolio</span>:~$ ./boot_asrith.sh</p>
+                        <p>› Booting Asrith.exe...</p>
+                        <p>› Loading projects...</p>
+                        <p>› Compiling curiosity... <span class="ok">[OK]</span></p>
+                        <p>› Ready. Type <span class="ok">help</span> to explore.</p>
+                    </div>
+                    <form id="terminalForm" class="terminal-input-row" autocomplete="off">
+                        <label for="terminalInput" class="u terminal-prompt">visitor@portfolio:~$</label>
+                        <input id="terminalInput" class="terminal-input" type="text" spellcheck="false"
+                            autocomplete="off" placeholder="help" />
+                    </form>
+                </div>
+            </div>
+
+            <h1>Hi, I&apos;m Asrith <span class="wave">👋</span></h1>
+            <p class="lead">I build apps. I ship ideas. I break things to learn.</p>
+            <p class="sub">1st Year CSE @ GITAM | Learning by building real stuff</p>
+
+            <div class="cta-row">
+                <a class="btn btn-primary" href="#projects" data-hover-track="projects">See What I&apos;ve Built</a>
+                <a class="btn btn-secondary" href="#contact" data-hover-track="contact">Let&apos;s Talk</a>
+                <a class="btn btn-secondary" href="./Asrith-Kulukuri-Resume.txt" download
+                    data-hover-track="resume">Download Resume</a>
+            </div>
+        </section>
+
+        <section id="about" class="container section-gap reveal">
+            <h2 class="grad-title">System.out.println("About Me");</h2>
+            <p class="section-sub">Who am I and why do I build?</p>
+
+            <article class="about-card">
+                <p>
+                    I&apos;m a <strong>1st year CSE student at GITAM</strong> who prefers building things over
+                    just reading about them. I like experimenting with apps, bots, extensions, and
+                    random ideas that turn into real projects.
+                </p>
+                <p>
+                    Most of what I know comes from breaking stuff, fixing it, and doing it all over
+                    again. I&apos;m here to build things that people actually use.
+                </p>
+                <div class="pill-row">
+                    <span>Curiosity</span>
+                    <span>Self-learning</span>
+                    <span>Late-night coding</span>
+                    <span>Shipping projects</span>
+                </div>
+            </article>
+        </section>
+
+        <section id="skills" class="container section-gap reveal">
+            <h2>Skills Matrix</h2>
+            <p class="section-sub">Core stack I use to ship projects quickly and reliably.</p>
+            <div class="skill-grid">
+                <article class="skill-card depth-1" data-hover-track="frontend">
+                    <h3>Frontend</h3>
+                    <div class="pill-row">
+                        <span>HTML</span><span>CSS</span><span>JavaScript</span><span>React</span><span>Tailwind</span>
+                    </div>
+                </article>
+                <article class="skill-card depth-1" data-hover-track="backend">
+                    <h3>Backend & APIs</h3>
+                    <div class="pill-row">
+                        <span>Node.js</span><span>REST APIs</span><span>Firebase</span><span>Auth</span>
+                    </div>
+                </article>
+                <article class="skill-card depth-1" data-hover-track="tools">
+                    <h3>Tools</h3>
+                    <div class="pill-row">
+                        <span>Git</span><span>GitHub</span><span>VS Code</span><span>Vercel</span><span>Netlify</span>
+                    </div>
+                </article>
+            </div>
+
+            <div class="fun-skill-grid">
+                <article class="joke-skill-card" data-joke-card>
+                    <h3>JavaScript</h3>
+                    <p data-default="Dynamic and everywhere." data-joke="Still confusing but powerful">Dynamic and
+                        everywhere.</p>
+                </article>
+                <article class="joke-skill-card" data-joke-card>
+                    <h3>Debugging</h3>
+                    <p data-default="Fixing issues one log at a time." data-joke="Professional Googler">Fixing issues
+                        one log at a time.</p>
+                </article>
+                <article class="joke-skill-card" data-joke-card>
+                    <h3>Git</h3>
+                    <p data-default="Version control safety net." data-joke="Commit first, pray later">Version control
+                        safety net.</p>
+                </article>
+            </div>
+
+            <article class="dev-terminal-card" aria-label="Developer terminal simulation">
+                <div class="terminal-head">
+                    <span></span><span></span><span></span>
+                </div>
+                <div class="terminal-body">
+                    <p><span class="u">asrith@lab</span>:~$ <span id="typedCommand"></span><span class="cursor"></span>
+                    </p>
+                </div>
+            </article>
+        </section>
+
+        <section id="projects" class="container section-gap reveal project-section">
+            <h2>Projects Lab</h2>
+            <p class="section-sub">A collection of things I&apos;ve built, broken, and fixed.</p>
+            <button id="bugEgg" class="bug-egg" type="button" title="Come back here 😭"
+                aria-label="Tiny bug easter egg">🐞</button>
+            <div id="projectGrid" class="project-grid" aria-live="polite"></div>
+        </section>
+
+        <section id="proof" class="container section-gap reveal">
+            <h2>Proof of Work</h2>
+            <p class="section-sub">Signals that show consistency: code output, contributions, and collaboration
+                feedback.</p>
+            <div class="proof-grid">
+                <article class="about-card">
+                    <h3>GitHub Contributions</h3>
+                    <img class="contrib" src="https://ghchart.rshah.org/5a6fff/AsrithKulukuri"
+                        alt="GitHub contribution chart for AsrithKulukuri" loading="lazy" decoding="async" />
+                </article>
+                <article class="about-card">
+                    <h3>Testimonials</h3>
+                    <div class="testimonial-list">
+                        <blockquote>
+                            <p>Asrith is fast at execution and consistently asks the right product questions.</p>
+                            <cite>Peer Collaborator</cite>
+                        </blockquote>
+                        <blockquote>
+                            <p>Strong curiosity, strong follow-through. He learns by doing and ships quickly.</p>
+                            <cite>Mentor Feedback</cite>
+                        </blockquote>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section id="journey" class="container section-gap reveal">
+            <h2>My Journey So Far</h2>
+            <p class="section-sub">How I went from "Hello World" to shipping full projects.</p>
+
+            <ol class="timeline">
+                <li class="active">
+                    <div class="dot"></div>
+                    <div class="content">
+                        <span class="year">Present</span>
+                        <h3>Now experimenting daily</h3>
+                        <p>
+                            Building full-stack apps, exploring new APIs, and shipping projects as fast as I can learn.
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <div class="dot"></div>
+                    <div class="content">
+                        <span class="year">2025</span>
+                        <h3>Built stronger web foundations</h3>
+                        <p>Focused on JavaScript, responsive UI, API integration, and deployment workflow.</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="dot"></div>
+                    <div class="content">
+                        <span class="year">2024</span>
+                        <h3>Discovered automation</h3>
+                        <p>Started building bots and scripts to automate repetitive tasks and save time.</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="dot"></div>
+                    <div class="content">
+                        <span class="year">2023</span>
+                        <h3>Started coding seriously</h3>
+                        <p>From simple programs to real mini projects with practical value.</p>
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+        <section id="contact" class="container section-gap contact-wrap reveal">
+            <div>
+                <h2>Got an idea?<br />A doubt?<br />Or just want to talk tech?</h2>
+                <p class="section-sub">
+                    Drop me a message. I&apos;m open to discussing projects, creative ideas, and opportunities.
+                </p>
+
+                <div class="social-row">
+                    <a class="social" href="https://github.com/AsrithKulukuri" target="_blank" rel="noopener noreferrer"
+                        aria-label="GitHub Profile">GitHub</a>
+                    <a class="social"
+                        href="https://www.linkedin.com/in/kulkuri-asrith-927070393?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+                        target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">LinkedIn</a>
+                </div>
+            </div>
+
+            <form id="contactForm" class="contact-card" novalidate>
+                <label for="name">Your Name</label>
+                <input id="name" name="name" type="text" placeholder="e.g. John Doe" required />
+
+                <label for="email">Your Email</label>
+                <input id="email" name="email" type="email" placeholder="e.g. john@example.com" required />
+
+                <label for="message">What&apos;s on your mind?</label>
+                <textarea id="message" name="message" rows="4" placeholder="Let&apos;s build something awesome..."
+                    required></textarea>
+
+                <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="hp" />
+                <button class="btn btn-primary" type="submit">Send Message</button>
+                <p id="formStatus" class="form-status" aria-live="polite"></p>
+            </form>
+        </section>
+    </main>
+
+    <footer class="container footer">Built by Asrith • Student who loves shipping 🚀
+        <div class="build-info">
+            <span>v2.0.0</span> • <span id="buildTime"></span> • <span>✨ Premium Edition</span>
+        </div>
+    </footer>
+
+    <a class="whatsapp-float" href="https://wa.me/918977311418" target="_blank" rel="noopener noreferrer"
+        aria-label="Chat on WhatsApp" title="Chat on WhatsApp">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path
+                d="M20.52 3.48A11.83 11.83 0 0 0 12.02 0C5.4 0 0 5.39 0 12.02c0 2.12.56 4.2 1.63 6.04L0 24l6.1-1.6a11.95 11.95 0 0 0 5.92 1.53h.01c6.62 0 12-5.39 12-12.01 0-3.21-1.25-6.23-3.51-8.44Zm-8.5 18.43h-.01a9.96 9.96 0 0 1-5.08-1.39l-.36-.22-3.62.95.97-3.53-.23-.36a9.98 9.98 0 0 1-1.53-5.34C2.16 6.5 6.5 2.16 12.02 2.16a9.8 9.8 0 0 1 6.99 2.91 9.79 9.79 0 0 1 2.89 6.96c0 5.51-4.35 9.88-9.88 9.88Zm5.42-7.42c-.3-.15-1.77-.87-2.05-.97-.27-.1-.47-.15-.67.15s-.77.97-.95 1.17c-.17.2-.35.22-.65.07-.3-.15-1.26-.47-2.4-1.5a9.01 9.01 0 0 1-1.67-2.07c-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.48-.5-.67-.51h-.57c-.2 0-.52.07-.8.37s-1.05 1.02-1.05 2.48 1.08 2.87 1.23 3.07c.15.2 2.12 3.24 5.13 4.54.72.31 1.29.5 1.73.64.73.23 1.4.2 1.93.12.59-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35Z" />
+        </svg>
+    </a>
+
+    <div id="idleOverlay" class="idle-overlay" hidden>
+        <p>Code fell asleep… click to wake it up 👀</p>
+    </div>
+
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <script>
+        // Build timestamp
+        (function () {
+            const buildTimeEl = document.getElementById('buildTime');
+            if (buildTimeEl) {
+                const now = new Date();
+                const month = String(now.getMonth() + 1).padStart(2, '0');
+                const day = String(now.getDate()).padStart(2, '0');
+                const year = now.getFullYear();
+                buildTimeEl.textContent = `${month}/${day}/${year}`;
+            }
+        })();
+    </script>
+
+    <script src="./themes.js" defer></script>
+    <script src="./hero-terminal.js" defer></script>
+    <script src="./script.js" defer></script>
+    <script src="./animations.js" defer></script>
+    <script src="./games.js" defer></script>
+    <script src="./premium-ui.js" defer></script>
+    <script src="./neural-grid.js" defer></script>
+    <script src="./parallax-engine.js" defer></script>
+    <script src="./achievement-system.js" defer></script>
+    <script src="./hud-system.js" defer></script>
+    <script src="./glitch-system.js" defer></script>
+    <script src="./chat-widget.js" defer></script>
+</body>
+
+</html>

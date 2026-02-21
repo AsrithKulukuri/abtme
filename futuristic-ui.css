@@ -1,0 +1,463 @@
+/*
+  ═══════════════════════════════════════════════════════════
+  FUTURISTIC FEATURES CSS
+  ═══════════════════════════════════════════════════════════
+  Styles for: cursor, neural grid, tooltips, achievements, glitch effects
+*/
+
+:root {
+    --animation-play-state: running;
+}
+
+/* ═══════ CUSTOM CURSOR ═══════ */
+.custom-cursor {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent, #ff3b78);
+    pointer-events: none;
+    z-index: 10000;
+    mix-blend-mode: difference;
+    transition: width 0.2s ease, height 0.2s ease;
+}
+
+.custom-cursor.hovering {
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border: 2px solid var(--accent, #ff3b78);
+}
+
+.cursor-glow {
+    position: fixed;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--accent, #ff3b78) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.3;
+    mix-blend-mode: screen;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+}
+
+.cursor-glow.hovering {
+    width: 80px;
+    height: 80px;
+    opacity: 0.5;
+}
+
+.click-ripple {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid var(--accent, #ff3b78);
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    animation: ripple-expand 0.8s cubic-bezier(0, 0, 0.2, 1) forwards;
+}
+
+@keyframes ripple-expand {
+    0% {
+        width: 10px;
+        height: 10px;
+        opacity: 1;
+    }
+
+    100% {
+        width: 100px;
+        height: 100px;
+        opacity: 0;
+    }
+}
+
+/* ═══════ HUD TOOLTIPS ═══════ */
+.hud-tooltip {
+    position: fixed;
+    background: rgba(8, 13, 38, 0.95);
+    border: 1px solid var(--accent, #ff3b78);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    color: var(--text, #e9f0ff);
+    pointer-events: none;
+    z-index: 10001;
+    opacity: 0;
+    transform: translateY(-5px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 20px rgba(var(--accent-rgb, 255, 59, 120), 0.2);
+}
+
+.hud-tooltip.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.tooltip-text {
+    font-weight: 500;
+}
+
+.tooltip-shortcut {
+    margin-top: 4px;
+    padding: 2px 6px;
+    background: var(--accent, #ff3b78);
+    color: var(--bg, #020419);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+/* ═══════ HELP BUTTON ═══════ */
+.hud-help-btn {
+    position: fixed;
+    bottom: 2rem;
+    left: 2rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--accent, #ff3b78);
+    color: var(--bg, #020419);
+    border: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 15px rgba(var(--accent-rgb, 255, 59, 120), 0.4);
+}
+
+.hud-help-btn:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 6px 25px rgba(var(--accent-rgb, 255, 59, 120), 0.6);
+}
+
+/* ═══════ HELP MODAL ═══════ */
+.hud-help-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 10002;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.hud-help-modal.show {
+    opacity: 1;
+}
+
+.help-modal-content {
+    background: var(--card, #080d26);
+    border: 2px solid var(--accent, #ff3b78);
+    border-radius: 16px;
+    padding: 2rem;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(var(--accent-rgb, 255, 59, 120), 0.3);
+}
+
+.help-modal-content h2 {
+    margin: 0 0 1.5rem;
+    color: var(--accent, #ff3b78);
+    font-size: 1.8rem;
+}
+
+.help-close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--bg-soft, #0a1030);
+    border: 1px solid var(--line, #1b2452);
+    color: var(--text, #e9f0ff);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.help-close-btn:hover {
+    background: var(--accent, #ff3b78);
+    transform: rotate(90deg);
+}
+
+.shortcuts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.shortcut-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem;
+    background: var(--bg-soft, #0a1030);
+    border-radius: 8px;
+    border: 1px solid var(--line, #1b2452);
+}
+
+.shortcut-item kbd {
+    padding: 4px 8px;
+    background: var(--accent, #ff3b78);
+    color: var(--bg, #020419);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+}
+
+.help-footer {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line, #1b2452);
+    text-align: center;
+    color: var(--muted, #9cabcc);
+    font-size: 0.85rem;
+}
+
+/* ═══════ ACHIEVEMENT NOTIFICATIONS ═══════ */
+.achievement-notification {
+    position: fixed;
+    top: 2rem;
+    right: -400px;
+    width: 350px;
+    background: linear-gradient(135deg, var(--card, #080d26), var(--bg-soft, #0a1030));
+    border: 2px solid var(--accent, #ff3b78);
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    z-index: 10003;
+    transition: right 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(var(--accent-rgb, 255, 59, 120), 0.4);
+    animation: achievement-glow 2s ease-in-out infinite;
+}
+
+.achievement-notification.show {
+    right: 2rem;
+}
+
+@keyframes achievement-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(var(--accent-rgb, 255, 59, 120), 0.4);
+    }
+
+    50% {
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), 0 0 50px rgba(var(--accent-rgb, 255, 59, 120), 0.6);
+    }
+}
+
+.achievement-icon {
+    font-size: 3rem;
+    flex-shrink: 0;
+    animation: achievement-bounce 0.6s ease-in-out;
+}
+
+@keyframes achievement-bounce {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.achievement-content {
+    flex: 1;
+}
+
+.achievement-title {
+    font-size: 0.75rem;
+    color: var(--accent, #ff3b78);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.achievement-name {
+    font-size: 1.1rem;
+    color: var(--text, #e9f0ff);
+    font-weight: 700;
+    margin: 0.25rem 0;
+}
+
+.achievement-desc {
+    font-size: 0.85rem;
+    color: var(--muted, #9cabcc);
+}
+
+/* ═══════ HUD TOAST ═══════ */
+.hud-toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: rgba(8, 13, 38, 0.95);
+    border: 1px solid var(--accent, #ff3b78);
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    color: var(--text, #e9f0ff);
+    font-weight: 500;
+    z-index: 10001;
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.hud-toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+/* ═══════ GLITCH EFFECTS ═══════ */
+.glitch-active {
+    animation: glitch-anim 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes glitch-anim {
+    0% {
+        transform: translate(0);
+    }
+
+    20% {
+        transform: translate(-2px, 2px);
+        filter: hue-rotate(0deg);
+    }
+
+    40% {
+        transform: translate(-2px, -2px);
+        filter: hue-rotate(180deg);
+    }
+
+    60% {
+        transform: translate(2px, 2px);
+        filter: hue-rotate(90deg);
+    }
+
+    80% {
+        transform: translate(2px, -2px);
+        filter: hue-rotate(270deg);
+    }
+
+    100% {
+        transform: translate(0);
+        filter: hue-rotate(0deg);
+    }
+}
+
+/* RGB Split Effect */
+.glitch-active::before,
+.glitch-active::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch-active::before {
+    animation: glitch-rgb-before 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    color: rgba(255, 0, 0, 0.7);
+}
+
+.glitch-active::after {
+    animation: glitch-rgb-after 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    color: rgba(0, 255, 255, 0.7);
+}
+
+@keyframes glitch-rgb-before {
+
+    0%,
+    100% {
+        transform: translate(0);
+    }
+
+    33% {
+        transform: translate(-2px, 0);
+    }
+
+    66% {
+        transform: translate(2px, 0);
+    }
+}
+
+@keyframes glitch-rgb-after {
+
+    0%,
+    100% {
+        transform: translate(0);
+    }
+
+    33% {
+        transform: translate(2px, 0);
+    }
+
+    66% {
+        transform: translate(-2px, 0);
+    }
+}
+
+/* ═══════ MOBILE RESPONSIVENESS ═══════ */
+@media (max-width: 768px) {
+
+    .custom-cursor,
+    .cursor-glow,
+    .click-ripple {
+        display: none;
+    }
+
+    .achievement-notification {
+        width: calc(100% - 2rem);
+        right: -100%;
+    }
+
+    .achievement-notification.show {
+        right: 1rem;
+    }
+
+    .hud-help-btn {
+        bottom: 6rem;
+        left: 1rem;
+    }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    .custom-cursor,
+    .cursor-glow,
+    .click-ripple,
+    .glitch-active {
+        animation: none !important;
+        transition: none !important;
+    }
+}

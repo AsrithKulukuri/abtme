@@ -1,0 +1,20 @@
+# Asrith AI Chatbot - Python Dependencies
+
+# Core Framework
+fastapi==0.109.0
+uvicorn[standard]==0.27.0
+pydantic==2.5.3
+
+# Google Gemini AI
+google-generativeai==0.3.2
+
+# Data Processing
+numpy==1.26.3
+
+# Environment Variables
+python-dotenv==1.0.0
+
+# Optional: Advanced Features
+# requests==2.31.0  # For external API calls
+# redis==5.0.1  # For distributed rate limiting
+# python-multipart==0.0.6  # For file uploads

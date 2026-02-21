@@ -1,0 +1,9 @@
+{
+    "name": "Asrith Portfolio",
+    "short_name": "Asrith",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#020419",
+    "theme_color": "#020419",
+    "icons": []
+}

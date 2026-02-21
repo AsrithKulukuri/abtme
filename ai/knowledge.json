@@ -1,0 +1,164 @@
+{
+    "metadata": {
+        "source": "Asrith Kulukuri Portfolio Website",
+        "last_updated": "2026-02-21",
+        "version": "1.0.0"
+    },
+    "student_info": {
+        "name": "Asrith Kulukuri",
+        "education": "BTech CSE, 1st Year",
+        "university": "GITAM University",
+        "location": "India",
+        "tagline": "I build apps. I ship ideas. I break things to learn.",
+        "role": "Student Developer",
+        "learning_approach": "Learning by building real stuff"
+    },
+    "about": {
+        "summary": "1st year CSE student at GITAM who prefers building things over just reading about them. Likes experimenting with apps, bots, extensions, and random ideas that turn into real projects.",
+        "learning_philosophy": "Most of what I know comes from breaking stuff, fixing it, and doing it all over again. I'm here to build things that people actually use.",
+        "characteristics": [
+            "Curiosity-driven",
+            "Self-learning",
+            "Late-night coding",
+            "Ships projects quickly",
+            "Learning by doing"
+        ]
+    },
+    "skills": {
+        "frontend": [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "React",
+            "Tailwind"
+        ],
+        "backend": [
+            "Node.js",
+            "REST APIs",
+            "Firebase",
+            "Auth"
+        ],
+        "tools": [
+            "Git",
+            "GitHub",
+            "VS Code",
+            "Vercel",
+            "Netlify"
+        ],
+        "approach": "Core stack used to ship projects quickly and reliably"
+    },
+    "fun_skills": [
+        {
+            "skill": "JavaScript",
+            "description": "Dynamic and everywhere",
+            "joke": "Still confusing but powerful"
+        },
+        {
+            "skill": "Debugging",
+            "description": "Fixing issues one log at a time",
+            "joke": "Professional Googler"
+        },
+        {
+            "skill": "Git",
+            "description": "Version control safety net",
+            "joke": "Commit first, pray later"
+        }
+    ],
+    "proof_of_work": {
+        "github": {
+            "username": "AsrithKulukuri",
+            "url": "https://github.com/AsrithKulukuri",
+            "description": "Active GitHub contributions showing consistency"
+        },
+        "testimonials": [
+            {
+                "quote": "Asrith is fast at execution and consistently asks the right product questions.",
+                "source": "Peer Collaborator"
+            },
+            {
+                "quote": "Strong curiosity, strong follow-through. He learns by doing and ships quickly.",
+                "source": "Mentor Feedback"
+            }
+        ]
+    },
+    "journey": {
+        "current": {
+            "phase": "Now experimenting daily",
+            "description": "Building full-stack apps, exploring new APIs, and shipping projects as fast as I can learn.",
+            "year": "Present"
+        },
+        "timeline": [
+            {
+                "phase": "Discovered web development",
+                "description": "Started with HTML/CSS basics, built simple pages",
+                "milestone": "First project deployed"
+            },
+            {
+                "phase": "Entered GITAM CSE program",
+                "description": "Started formal computer science education",
+                "milestone": "Structured learning began"
+            },
+            {
+                "phase": "Built first full-stack app",
+                "description": "Connected frontend to backend, learned APIs",
+                "milestone": "Technical breakthrough"
+            }
+        ]
+    },
+    "portfolio_features": {
+        "themes": [
+            {
+                "name": "Studio",
+                "emoji": "✨",
+                "description": "Original design with pink and blue neon colors"
+            },
+            {
+                "name": "Midnight Hacker",
+                "emoji": "🌙",
+                "description": "Dark hacker vibes with neon green accents"
+            },
+            {
+                "name": "Chill Student",
+                "emoji": "☁️",
+                "description": "Soft, calm, pastel vibes"
+            },
+            {
+                "name": "Startup Energy",
+                "emoji": "⚡",
+                "description": "Electric blue energy with fast micro-interactions"
+            },
+            {
+                "name": "Gamer Mode",
+                "emoji": "🎮",
+                "description": "Retro gaming aesthetic with bold colors"
+            },
+            {
+                "name": "Experimental Chaos",
+                "emoji": "🎲",
+                "description": "Random, unpredictable, pure chaos (hidden theme)"
+            }
+        ],
+        "interactive_elements": [
+            "Multi-theme system with personality-driven designs",
+            "Mini games: Catch the Bug and Coffee Clicker",
+            "Konami code easter egg (↑↑↓↓←→←→BA)",
+            "Scroll progress indicator",
+            "Smart navigation highlighting",
+            "Parallax glow effects",
+            "Focus-aware animations",
+            "Idle detection with discovery hints",
+            "Motion hierarchy system"
+        ]
+    },
+    "contact": {
+        "github": "https://github.com/AsrithKulukuri",
+        "linkedin": "https://www.linkedin.com/in/kulkuri-asrith-927070393",
+        "website": "https://asrith-portfolio.vercel.app/",
+        "resume": "Available for download on website"
+    },
+    "meta": {
+        "site_description": "Personal portfolio showcasing projects, skills, and journey as a student developer",
+        "philosophy": "Student playground for experimentation, not a corporate resume",
+        "build_approach": "Premium UI design with micro-interactions and multi-theme system"
+    }
+}

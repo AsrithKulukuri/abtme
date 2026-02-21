@@ -1,0 +1,26 @@
+ASRITH KULUKURI
+Student Developer | 1st Year CSE @ GITAM
+
+Contact
+- Email: asrithkulkuri@gmail.com
+- GitHub: https://github.com/AsrithKulukuri
+- LinkedIn: https://www.linkedin.com/in/kulkuri-asrith-927070393
+
+Summary
+- Product-minded student developer focused on building practical projects.
+- Strong interest in full-stack development, automation, and shipping fast.
+
+Skills
+- Frontend: HTML, CSS, JavaScript, React, Tailwind
+- Backend/Tools: Node.js, Firebase, REST APIs, Git, GitHub, Vercel, Netlify
+
+Selected Work
+- Portfolio Website
+- Campus Buddy
+- AutoReply Bot
+- DevDashboard
+
+Education
+- B.Tech CSE (1st Year), GITAM
+
+Updated: February 2026
