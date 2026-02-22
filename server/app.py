@@ -164,6 +164,9 @@ async def chat(request: ChatRequest, req: Request):
                 stream=False
             )
 
+            if isinstance(response_text, str) and response_text.startswith("AI is temporarily unavailable"):
+                raise HTTPException(status_code=503, detail=response_text)
+
             return ChatResponse(
                 response=response_text,
                 theme=request.theme,

@@ -12,12 +12,46 @@ class SimpleAIHandler:
     def __init__(self):
         """Initialize Gemini client"""
         if not GEMINI_API_KEY:
-            raise ValueError("GEMINI_API_KEY is missing. Set it in Render environment variables.")
+            raise ValueError(
+                "GEMINI_API_KEY is missing. Set it in Render environment variables.")
 
         genai.configure(api_key=GEMINI_API_KEY)
         self.model_name = GEMINI_MODEL
-        self.model = genai.GenerativeModel(self.model_name)
+        self.model_candidates = self._build_model_candidates(self.model_name)
         self.system_prompt = self._get_system_prompt()
+
+    def _build_model_candidates(self, preferred_model: str) -> List[str]:
+        """Build candidate model list from preferred + available API models"""
+        preferred = [
+            preferred_model,
+            "gemini-2.0-flash",
+            "gemini-2.0-flash-lite",
+            "gemini-1.5-flash",
+            "gemini-1.5-flash-8b",
+        ]
+
+        candidates: List[str] = []
+
+        def add_candidate(name: str):
+            normalized = name.strip()
+            if normalized.startswith("models/"):
+                normalized = normalized.split("/", 1)[1]
+            if normalized and normalized not in candidates:
+                candidates.append(normalized)
+
+        for model_name in preferred:
+            add_candidate(model_name)
+
+        try:
+            for model in genai.list_models():
+                methods = getattr(model, "supported_generation_methods", []) or []
+                model_name = getattr(model, "name", "")
+                if "generateContent" in methods and model_name:
+                    add_candidate(model_name)
+        except Exception as e:
+            print(f"⚠️ Could not list Gemini models: {e}")
+
+        return candidates
 
     def _get_system_prompt(self) -> str:
         """Get system prompt with basic knowledge"""
@@ -113,10 +147,9 @@ RESPONSE RULES:
                 "max_output_tokens": MAX_TOKENS,
             }
 
-            model_candidates = [self.model_name, "gemini-1.5-flash", "gemini-1.5-flash-8b"]
             last_error = None
 
-            for model_name in model_candidates:
+            for model_name in self.model_candidates:
                 try:
                     model = genai.GenerativeModel(model_name)
                     if stream:
@@ -136,7 +169,8 @@ RESPONSE RULES:
                     last_error = model_error
                     continue
 
-            raise RuntimeError(f"All Gemini model attempts failed: {last_error}")
+            raise RuntimeError(
+                f"All Gemini model attempts failed: {last_error}")
 
         except Exception as e:
             print(f"❌ Error: {str(e)}")
