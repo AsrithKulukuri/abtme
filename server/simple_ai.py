@@ -3,8 +3,7 @@ Simple AI Handler without RAG - Fast startup
 Uses Google Gemini with basic knowledge
 """
 
-from google import genai
-from google.genai import types
+import google.generativeai as genai
 from typing import List, Dict, Optional
 from config import GEMINI_API_KEY, GEMINI_MODEL, MAX_TOKENS, TEMPERATURE, BOT_NAME
 
@@ -12,7 +11,8 @@ from config import GEMINI_API_KEY, GEMINI_MODEL, MAX_TOKENS, TEMPERATURE, BOT_NA
 class SimpleAIHandler:
     def __init__(self):
         """Initialize Gemini client"""
-        self.client = genai.Client(api_key=GEMINI_API_KEY)
+        genai.configure(api_key=GEMINI_API_KEY)
+        self.model = genai.GenerativeModel(GEMINI_MODEL)
         self.system_prompt = self._get_system_prompt()
 
     def _get_system_prompt(self) -> str:
@@ -104,23 +104,22 @@ RESPONSE RULES:
         prompt = self._build_prompt(user_message, theme, conversation_history)
 
         try:
-            config = types.GenerateContentConfig(
-                temperature=TEMPERATURE,
-                max_output_tokens=MAX_TOKENS,
-            )
+            generation_config = {
+                "temperature": TEMPERATURE,
+                "max_output_tokens": MAX_TOKENS,
+            }
 
             if stream:
-                response = self.client.models.generate_content_stream(
-                    model=GEMINI_MODEL,
-                    contents=prompt,
-                    config=config
+                response = self.model.generate_content(
+                    prompt,
+                    generation_config=generation_config,
+                    stream=True
                 )
                 return response
             else:
-                response = self.client.models.generate_content(
-                    model=GEMINI_MODEL,
-                    contents=prompt,
-                    config=config
+                response = self.model.generate_content(
+                    prompt,
+                    generation_config=generation_config
                 )
                 return response.text.strip()
 
