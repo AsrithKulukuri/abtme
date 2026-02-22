@@ -5,16 +5,26 @@ Production-ready API with RAG, rate limiting, and theme awareness
 
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import StreamingResponse
+from fastapi.responses import StreamingResponse, FileResponse
 from pydantic import BaseModel, Field
 from typing import Optional, List, Dict
 import uvicorn
 import time
+from pathlib import Path
 
 from config import HOST, PORT, CORS_ORIGINS, BOT_NAME, BOT_VERSION
 from rate_limiter import rate_limiter
 # from ai_handler import get_ai_handler  # Disabled temporarily - RAG slow on first run
 from simple_ai import get_simple_ai as get_ai_handler  # Fast startup without RAG
+
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+INDEX_FILE = PROJECT_ROOT / "index.html"
+ALLOWED_STATIC_EXTENSIONS = {
+    ".html", ".css", ".js", ".json", ".txt", ".xml", ".webmanifest",
+    ".svg", ".png", ".jpg", ".jpeg", ".gif", ".ico", ".woff", ".woff2", ".ttf", ".map"
+}
+BLOCKED_TOP_LEVEL_DIRS = {"server", "ai", ".git", "__pycache__"}
 
 
 # ===== FastAPI App =====
@@ -86,12 +96,18 @@ def get_client_ip(request: Request) -> str:
 
 @app.get("/")
 async def root():
-    """Health check endpoint"""
+    """Serve portfolio frontend"""
+    return FileResponse(INDEX_FILE)
+
+
+@app.get("/api")
+async def api_info():
+    """API info endpoint"""
     return {
         "bot": BOT_NAME,
         "version": BOT_VERSION,
         "status": "online",
-        "endpoints": ["/chat", "/welcome", "/stats"]
+        "endpoints": ["/chat", "/welcome", "/stats", "/health"]
     }
 
 
@@ -200,6 +216,26 @@ async def health():
         "version": BOT_VERSION,
         "timestamp": time.time()
     }
+
+
+@app.get("/{file_path:path}")
+async def static_files(file_path: str):
+    """Serve static frontend assets and SPA fallback"""
+    if not file_path:
+        return FileResponse(INDEX_FILE)
+
+    normalized_path = Path(file_path)
+    if normalized_path.parts and normalized_path.parts[0] in BLOCKED_TOP_LEVEL_DIRS:
+        raise HTTPException(status_code=404, detail="Not found")
+
+    candidate = (PROJECT_ROOT / normalized_path).resolve()
+    if PROJECT_ROOT not in candidate.parents and candidate != PROJECT_ROOT:
+        raise HTTPException(status_code=404, detail="Not found")
+
+    if candidate.is_file() and candidate.suffix.lower() in ALLOWED_STATIC_EXTENSIONS:
+        return FileResponse(candidate)
+
+    return FileResponse(INDEX_FILE)
 
 
 # ===== Server Startup =====

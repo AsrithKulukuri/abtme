@@ -4,7 +4,7 @@
 */
 
 (function () {
-    const API_BASE_URL = `${window.location.protocol}//${window.location.hostname}:8000`;
+    const API_BASE_URL = window.__ASRITH_AI_API_URL || window.location.origin;
     const MAX_HISTORY = 10;  // Max messages to keep in memory
 
     let conversationHistory = [];
