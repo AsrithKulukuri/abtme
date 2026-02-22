@@ -11,8 +11,12 @@ from config import GEMINI_API_KEY, GEMINI_MODEL, MAX_TOKENS, TEMPERATURE, BOT_NA
 class SimpleAIHandler:
     def __init__(self):
         """Initialize Gemini client"""
+        if not GEMINI_API_KEY:
+            raise ValueError("GEMINI_API_KEY is missing. Set it in Render environment variables.")
+
         genai.configure(api_key=GEMINI_API_KEY)
-        self.model = genai.GenerativeModel(GEMINI_MODEL)
+        self.model_name = GEMINI_MODEL
+        self.model = genai.GenerativeModel(self.model_name)
         self.system_prompt = self._get_system_prompt()
 
     def _get_system_prompt(self) -> str:
@@ -109,23 +113,34 @@ RESPONSE RULES:
                 "max_output_tokens": MAX_TOKENS,
             }
 
-            if stream:
-                response = self.model.generate_content(
-                    prompt,
-                    generation_config=generation_config,
-                    stream=True
-                )
-                return response
-            else:
-                response = self.model.generate_content(
-                    prompt,
-                    generation_config=generation_config
-                )
-                return response.text.strip()
+            model_candidates = [self.model_name, "gemini-1.5-flash", "gemini-1.5-flash-8b"]
+            last_error = None
+
+            for model_name in model_candidates:
+                try:
+                    model = genai.GenerativeModel(model_name)
+                    if stream:
+                        return model.generate_content(
+                            prompt,
+                            generation_config=generation_config,
+                            stream=True
+                        )
+
+                    response = model.generate_content(
+                        prompt,
+                        generation_config=generation_config
+                    )
+                    if response.text:
+                        return response.text.strip()
+                except Exception as model_error:
+                    last_error = model_error
+                    continue
+
+            raise RuntimeError(f"All Gemini model attempts failed: {last_error}")
 
         except Exception as e:
             print(f"❌ Error: {str(e)}")
-            return "Sorry, I encountered an error. Please try again."
+            return "AI is temporarily unavailable. Please check Gemini API configuration and try again."
 
     def generate_welcome_message(self, theme: str = "studio") -> str:
         """Generate theme-aware welcome message"""

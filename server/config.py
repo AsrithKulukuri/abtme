@@ -10,9 +10,9 @@ load_dotenv()
 
 # ===== Google Gemini Configuration =====
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-GEMINI_MODEL = "gemini-2.5-flash"  # Latest fast model
-MAX_TOKENS = 500  # Keep responses concise
-TEMPERATURE = 0.7  # Balanced creativity
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")
+MAX_TOKENS = int(os.getenv("MAX_TOKENS", "500"))  # Keep responses concise
+TEMPERATURE = float(os.getenv("TEMPERATURE", "0.7"))  # Balanced creativity
 
 # ===== Rate Limiting =====
 RATE_LIMIT_PER_MINUTE = 10
